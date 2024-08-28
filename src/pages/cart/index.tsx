@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
 
-    const {cart} = useContext(CartContext);
+    const {cart, total, addCart, removeCart } = useContext(CartContext);
 
     return ( 
         <div className="w-full max-w-7xl mx-auto">
@@ -34,11 +34,11 @@ const Cart = () => {
                 })}</strong>
 
                 <div className="flex gap-3 items-center justify-center">
-                    <button className="bg-slate-600 px-2 rounded text-white font-medium  flex items-center justify-center">
+                    <button onClick={()=> removeCart(item)} className="bg-slate-600 px-2 rounded text-white font-medium  flex items-center justify-center">
                         -
                     </button>
                     <p>{item.amount}</p>
-                    <button className="bg-slate-600 px-1.5 rounded text-white font-medium  flex items-center justify-center">
+                    <button onClick={()=> addCart(item)} className="bg-slate-600 px-1.5 rounded text-white font-medium  flex items-center justify-center">
                         +
                     </button>
                 </div>
@@ -54,9 +54,7 @@ const Cart = () => {
             </section>
             ))}
 
-            {cart.length !== 0 && (
-                <p className="mt-4 font-bold">Total: </p>
-            )}
+            {cart.length !== 0 && <p className="mt-4 font-bold">Total: {total} </p> }
 
         </div>
      );
